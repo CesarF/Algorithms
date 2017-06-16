@@ -2,8 +2,7 @@ import java.util.Arrays;
  
 /**
  * Collinear points data structure using quick sort algorithm
- * With validation in line 51 the execution time increases due to an extra loop
- * Without validation in line 51 collinear structure increases its size with extra line segments (repeated)
+ * Only adds line segments when current node is the first of line
  * 
  * @author CesarF 5/19/2017
  *
@@ -47,11 +46,9 @@ public class FastCollinearPoints {
                 }   
                 if (j == tPoints.length-1 || slope != currentSlope) {   
                     if (count >= 2 ) {
-						// This validation is explained in class documentation
-                    	if (!isAlreadyAdded(p, q)) {
+                    	if (r.compareTo(p) == 0) {
 	                    	LineNode ln = new LineNode();
-	                        ln.p = p;
-	                        ln.q = q;
+	                        ln.line = new LineSegment(p, q);
 	                        quantity ++;
 	                        LineNode temp = first;
 	                        first = ln;
@@ -78,21 +75,10 @@ public class FastCollinearPoints {
     private class LineNode {
          
         private LineNode next;
-        private Point p;
-        private Point q;
+        private LineSegment line;
                  
     }
-    
-    private boolean isAlreadyAdded(Point p, Point q) {
-    	LineNode node = first;
-    	for (int i = 0; i < quantity; i++) {
-			if ((node.p == p && node.q == q) || (node.p == q && node.q == p)) return true;
-			node = node.next;
-		}
-    	return false;
-    }
-    
-    
+        
     public int numberOfSegments()  {
         // the number of line segments
         return quantity;
@@ -103,8 +89,7 @@ public class FastCollinearPoints {
 			segments = new LineSegment[quantity];
 			LineNode node = first;
 			for (int i = 0; i < segments.length; i++) {
-				LineSegment ls = new LineSegment(node.p, node.q);
-				segments[i] = ls;
+				segments[i] = node.line;
 				node = node.next;
 			}
 		}        
