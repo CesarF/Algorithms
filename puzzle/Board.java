@@ -1,6 +1,11 @@
 import edu.princeton.cs.algs4.Stack;
 
-
+/**
+ * Board -> 8 puzzle project
+ * 
+ * @author CesarF 5/19/2017
+ *
+*/
 public class Board {
 	
 	private final int[][] blocks;

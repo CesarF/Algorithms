@@ -5,7 +5,12 @@ import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
-
+/**
+ * 8 puzzle solver
+ * 
+ * @author CesarF 5/19/2017
+ *
+*/
 public class Solver {
 			
 	private boolean isSolvable;
